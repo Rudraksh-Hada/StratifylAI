@@ -61,8 +61,9 @@ def model_exists():
 
 
 def launch_dashboard():
+    port = int(os.environ.get("PORT", 5000))
     print("\n🌐 Step 3/3 — Launching Dashboard...")
-    print("   Open your browser → http://127.0.0.3:5000")
+    print(f"   Open your browser → http://0.0.0.0:{port}")
     print("   Press Ctrl+C to stop\n")
     from app import start
     start()

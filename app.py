@@ -154,9 +154,10 @@ def start():
 
     t = threading.Thread(target=simulate_and_detect, daemon=True)
     t.start()
+    port = int(os.environ.get("PORT", 5000))
     print("  📡 Log simulator running in background...")
-    print("  🌐 Dashboard → http://127.0.0.3:5000\n")
-    app.run(host="127.0.0.3", debug=False, port=5000, use_reloader=False)
+    print(f"  🌐 Dashboard → http://0.0.0.0:{port}\n")
+    app.run(host="0.0.0.0", debug=False, port=port, use_reloader=False)
 
 
 if __name__ == "__main__":

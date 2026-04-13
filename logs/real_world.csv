@@ -5995,3 +5995,89 @@ time,date,ip,log,label
 20:04:11,12-04-2026,138.142.53.65,normal authentication success,normal
 20:04:12,12-04-2026,121.12.59.163,session reopened after timeout,normal
 20:04:13,12-04-2026,211.23.152.12,user profile loaded,normal
+06:08:52,13-04-2026,81.141.8.40,failed login attempt then success,normal
+06:08:53,13-04-2026,149.147.240.28,user logged out,normal
+06:08:54,13-04-2026,122.187.224.206,user profile loaded,normal
+06:08:55,13-04-2026,11.22.248.20,failed login attempt then success,normal
+06:08:56,13-04-2026,78.33.81.242,token refreshed successfully,normal
+06:08:57,13-04-2026,203.194.173.249,file read successfully,normal
+06:08:58,13-04-2026,217.9.152.23,brief database connection retry success,normal
+06:08:59,13-04-2026,176.97.187.107,user logged out,normal
+06:09:00,13-04-2026,217.9.152.23,failed login attempt then success,normal
+06:09:01,13-04-2026,237.9.6.179,session closed normally,normal
+06:09:02,13-04-2026,198.51.100.1,ddos request flood 5000 requests per second,ddos
+06:09:03,13-04-2026,143.34.5.33,failed login attempt then success,normal
+06:09:04,13-04-2026,122.187.224.206,session started,normal
+06:09:05,13-04-2026,105.99.173.167,normal authentication success,normal
+06:09:06,13-04-2026,224.102.31.209,request processed successfully,normal
+06:09:07,13-04-2026,126.129.158.205,data fetched from database,normal
+06:09:08,13-04-2026,28.205.247.218,user logged out,normal
+06:09:09,13-04-2026,111.4.13.138,query executed successfully,normal
+06:09:10,13-04-2026,242.86.99.140,brief database connection retry success,normal
+06:09:11,13-04-2026,151.116.23.8,data fetched from database,normal
+06:09:12,13-04-2026,192.168.66.66,port scanning detected multiple ports,port_scan
+06:09:13,13-04-2026,103.197.167.50,token refreshed successfully,normal
+06:09:14,13-04-2026,28.205.247.218,request processed successfully,normal
+06:09:15,13-04-2026,92.166.3.114,api call completed,normal
+06:09:16,13-04-2026,17.183.198.156,normal authentication success,normal
+06:09:17,13-04-2026,151.116.23.8,query executed successfully,normal
+06:09:18,13-04-2026,126.129.158.205,request processed successfully,normal
+06:09:19,13-04-2026,225.26.70.46,query executed successfully,normal
+06:09:20,13-04-2026,30.26.59.110,login from new ip verified,normal
+06:09:21,13-04-2026,145.33.180.121,session started,normal
+06:09:22,13-04-2026,103.21.244.0,failed login attempt,brute_force
+06:09:23,13-04-2026,176.97.187.107,session closed normally,normal
+06:09:24,13-04-2026,103.197.167.50,user logged out,normal
+06:09:25,13-04-2026,78.33.81.242,connection established successfully,normal
+06:09:26,13-04-2026,36.72.193.125,session closed normally,normal
+06:09:27,13-04-2026,151.187.51.220,login from new ip verified,normal
+06:09:28,13-04-2026,162.216.159.131,token refreshed successfully,normal
+06:09:29,13-04-2026,225.26.70.46,failed login attempt then success,normal
+06:09:30,13-04-2026,24.56.144.12,login successful,normal
+06:09:31,13-04-2026,78.33.81.242,session started,normal
+06:09:32,13-04-2026,198.51.100.1,ddos request flood 5000 requests per second,ddos
+06:09:33,13-04-2026,151.187.51.220,failed login attempt then success,normal
+06:09:34,13-04-2026,143.34.5.33,session reopened after timeout,normal
+06:09:35,13-04-2026,222.160.127.116,connection established successfully,normal
+06:09:36,13-04-2026,28.205.247.218,file read successfully,normal
+06:09:37,13-04-2026,185.175.189.79,login from new ip verified,normal
+06:09:38,13-04-2026,176.97.187.107,user logged out,normal
+06:09:39,13-04-2026,25.158.150.78,connection established successfully,normal
+06:09:40,13-04-2026,225.26.70.46,failed login attempt then success,normal
+06:09:41,13-04-2026,139.220.163.85,session started,normal
+06:09:42,13-04-2026,45.33.32.156,port scanning detected multiple ports,port_scan
+06:09:43,13-04-2026,78.33.81.242,api call completed,normal
+06:09:44,13-04-2026,147.56.151.116,brief database connection retry success,normal
+06:09:45,13-04-2026,145.33.180.121,api call completed,normal
+06:09:46,13-04-2026,129.106.174.213,normal authentication success,normal
+06:09:47,13-04-2026,122.187.224.206,cache hit for request,normal
+06:09:48,13-04-2026,30.26.59.110,password verified successfully,normal
+06:09:49,13-04-2026,111.4.13.138,brief database connection retry success,normal
+06:09:50,13-04-2026,28.205.247.218,user logged out,normal
+06:09:51,13-04-2026,112.40.17.92,normal authentication success,normal
+06:09:52,13-04-2026,103.21.244.0,failed login attempt,brute_force
+06:09:53,13-04-2026,226.226.234.44,login successful,normal
+06:09:54,13-04-2026,92.166.3.114,user profile loaded,normal
+06:09:55,13-04-2026,111.4.13.138,login successful,normal
+06:09:56,13-04-2026,30.26.59.110,token refreshed successfully,normal
+06:09:58,13-04-2026,205.63.40.114,failed login attempt then success,normal
+06:09:59,13-04-2026,145.33.180.121,file read successfully,normal
+06:10:00,13-04-2026,122.187.224.206,data fetched from database,normal
+06:10:01,13-04-2026,122.187.224.206,file read successfully,normal
+06:10:02,13-04-2026,149.147.240.28,user profile loaded,normal
+06:10:03,13-04-2026,103.21.244.0,failed login attempt,brute_force
+06:10:04,13-04-2026,162.216.159.131,connection established successfully,normal
+06:10:05,13-04-2026,176.97.187.107,normal authentication success,normal
+06:10:06,13-04-2026,139.220.163.85,user logged out,normal
+06:10:07,13-04-2026,162.216.159.131,user logged out,normal
+06:10:08,13-04-2026,78.33.81.242,login successful,normal
+06:10:09,13-04-2026,226.226.234.44,request processed successfully,normal
+06:10:10,13-04-2026,153.239.185.128,login from new ip verified,normal
+06:10:11,13-04-2026,24.56.144.12,brief database connection retry success,normal
+06:10:12,13-04-2026,197.60.135.69,session reopened after timeout,normal
+06:10:13,13-04-2026,45.33.32.156,sql injection attempt detected,sql_injection
+06:10:14,13-04-2026,139.220.163.85,password verified successfully,normal
+06:10:15,13-04-2026,25.158.150.78,data fetched from database,normal
+06:10:16,13-04-2026,149.147.240.28,brief database connection retry success,normal
+06:10:17,13-04-2026,122.187.224.206,failed login attempt then success,normal
+06:10:18,13-04-2026,149.52.70.128,session reopened after timeout,normal
