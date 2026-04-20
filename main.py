@@ -26,7 +26,7 @@ BANNER = """
 
 def train_model():
     print(BANNER)
-    # Step 1: generate training data
+    # Step 1: make sure the training dataset exists
     print("📂 Step 1/3 — Generating training data...")
     from data.generate_training_data import generate_normal_logs
     import pandas as pd
@@ -42,7 +42,7 @@ def train_model():
         df.to_csv(data_path, index=False)
         print(f"   ✅ Generated 10,000 logs → {data_path}")
 
-    # Step 2: train autoencoder
+    # Step 2: train the autoencoder model
     print("\n🧠 Step 2/3 — Training Autoencoder...")
     from model.train import train
     threshold = train()
@@ -85,7 +85,7 @@ def main():
         launch_dashboard()
 
     else:
-        # Default: train + serve
+        # Default workflow: train the model if needed, then launch the dashboard
         if not model_exists():
             train_model()
         else:

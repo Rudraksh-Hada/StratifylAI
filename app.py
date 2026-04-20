@@ -16,7 +16,7 @@ app = Flask(__name__)
 BASE_DIR    = os.path.dirname(__file__)
 REAL_WORLD  = os.path.join(BASE_DIR, "logs", "real_world.csv")
 
-# ── Shared state ─────────────────────────────────────────────────────────────
+# ── Shared state for the simulator and dashboard ───────────────────────────────────
 recent_logs   = deque(maxlen=200)
 anomaly_stats = {
     "total": 0, "anomalies": 0, "normal": 0,
@@ -25,7 +25,7 @@ anomaly_stats = {
 stats_lock    = threading.Lock()
 detector      = None
 
-# ── Simulator (runs in background) ─────────────────────────────────────────
+# ── Simulator logic that generates log entries in the background ───────────────────
 NORMAL_LOGS = [
     "connection established successfully",
     "login successful", "normal authentication success",
@@ -93,7 +93,7 @@ def simulate_and_detect():
             writer.writerow(row)
             f.flush()
 
-            # Detect
+            # Run the anomaly detector for this new log entry
             result = detector.detect(row)
             result["true_label"] = label
 
@@ -116,7 +116,7 @@ def simulate_and_detect():
             time.sleep(1)
 
 
-# ── Routes ────────────────────────────────────────────────────────────────────
+# ── Flask routes for the dashboard and API ───────────────────────────────────────
 @app.route("/")
 def index():
     return render_template("index.html")

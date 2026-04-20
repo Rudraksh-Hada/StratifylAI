@@ -12,13 +12,13 @@ from model.autoencoder import Autoencoder
 
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "model")
 
-# ── Rule-based thresholds ──────────────────────────────────────────────────
-MAX_FAILED_LOGINS   = 3      # per IP in window
-BRUTE_FORCE_WINDOW  = 30     # seconds
-NIGHT_HOURS         = (0, 5) # suspicious login window
-DDoS_REQUEST_LIMIT  = 20     # requests per IP in window
-DDoS_WINDOW         = 10     # seconds
-SESSION_SPAM_LIMIT  = 10     # sessions per IP in window
+# ── Thresholds and limits used by the rule engine ─────────────────────────────
+MAX_FAILED_LOGINS   = 3      # maximum failed login attempts per IP inside the time window
+BRUTE_FORCE_WINDOW  = 30     # time window in seconds for brute-force detection
+NIGHT_HOURS         = (0, 5) # hour range considered suspicious for login attempts
+DDoS_REQUEST_LIMIT  = 20     # request count threshold per IP for flood detection
+DDoS_WINDOW         = 10     # time window in seconds for DDoS detection
+SESSION_SPAM_LIMIT  = 10     # session event threshold per IP inside the window
 
 ANOMALY_KEYWORDS = {
     "unauthorized":       "unauthorized_access",
@@ -37,7 +37,7 @@ ANOMALY_KEYWORDS = {
 class HybridDetector:
     def __init__(self):
         self._load_model()
-        # Rule-based state tracking
+        # Keep recent event timestamps for each IP address so rules can detect patterns over time
         self.failed_logins   = defaultdict(list)  # ip → [timestamps]
         self.request_times   = defaultdict(list)
         self.session_counts  = defaultdict(list)
@@ -61,7 +61,7 @@ class HybridDetector:
         features, _, _ = extract_features(df, self.vectorizer, self.scaler, fit=False)
         return features
 
-    # ── ML Layer ────────────────────────────────────────────────────────────
+    # ── Machine learning layer ───────────────────────────────────────────────────
     def ml_detect(self, df):
         features = self._extract(df)
         X = torch.tensor(features, dtype=torch.float32)
@@ -70,19 +70,19 @@ class HybridDetector:
             errors = torch.mean((X - recon) ** 2, dim=1).numpy()
         return errors
 
-    # ── Rule Layer ───────────────────────────────────────────────────────────
+    # ── Rule-based detection layer ───────────────────────────────────────────────
     def rule_detect(self, row):
         now     = time.time()
         ip      = str(row.get("ip", ""))
         log_msg = str(row.get("log", "")).lower()
         flags   = []
 
-        # 1. Keyword-based detection
+        # 1. Keyword-based detection from the log message
         for kw, atype in ANOMALY_KEYWORDS.items():
             if kw in log_msg:
                 flags.append(atype)
 
-        # 2. Brute force: failed login tracking
+        # 2. Brute force detection: track repeated failed login attempts
         if "failed login" in log_msg:
             self.failed_logins[ip].append(now)
         self.failed_logins[ip] = [
@@ -92,7 +92,7 @@ class HybridDetector:
         if len(self.failed_logins[ip]) >= MAX_FAILED_LOGINS:
             flags.append("brute_force")
 
-        # 3. DDoS: request flooding
+        # 3. DDoS detection: identify excessive requests from the same IP
         self.request_times[ip].append(now)
         self.request_times[ip] = [
             t for t in self.request_times[ip]
@@ -101,7 +101,7 @@ class HybridDetector:
         if len(self.request_times[ip]) >= DDoS_REQUEST_LIMIT:
             flags.append("ddos")
 
-        # 4. Unusual login hour
+        # 4. Unusual login hour detection for nighttime activity
         try:
             hour = int(str(row.get("time", "12:00:00")).split(":")[0])
             if NIGHT_HOURS[0] <= hour <= NIGHT_HOURS[1]:
@@ -110,7 +110,7 @@ class HybridDetector:
         except:
             pass
 
-        # 5. Session spam
+        # 5. Session spam detection: too many session events in a short interval
         if "session" in log_msg:
             self.session_counts[ip].append(now)
             self.session_counts[ip] = [
@@ -122,7 +122,7 @@ class HybridDetector:
 
         return flags
 
-    # ── Combined Detection ────────────────────────────────────────────────
+    # ── Combined detection logic ───────────────────────────────────────────────
     def detect(self, row: dict) -> dict:
         df = pd.DataFrame([row])
         errors = self.ml_detect(df)
